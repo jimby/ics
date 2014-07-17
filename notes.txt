@@ -1,0 +1,2 @@
+06/07/14 18:30 workings on deleteWarehouse.php,WarehouseDB.php,editWarehouse.php,warehouse.php
+	trying to setup deletewarehouse. Can't follow path.

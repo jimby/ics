@@ -1,0 +1,88 @@
+CREATE TABLE users (
+  id INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name CHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL UNIQUE,
+  password CHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE warehouses (
+  id INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  wname CHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL UNIQUE,
+  wlocation CHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE inventory (
+  id INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  warehouse_id INT unsigned not null,
+  product CHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  cost CHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  qoh CHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  DatePlanted varchar(50),
+  DateReady varchar(50),
+  SeedTransplant varchar(50),
+  LotNumber varchar(100),
+  description varchar(50),
+  FOREIGN KEY (warehouse_id) REFERENCES warehouses (id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE customers (
+  id int(10) unsigned NOT NULL auto_increment,
+  lname varchar(100),
+  fname varchar(100),
+  mi varchar(5),
+  name varchar(50),
+  street varchar(100),
+  city varchar(100),
+  province varchar(25),
+  country varchar(25),
+  postal_code varchar(25),
+  phone varchar(25),
+  email varchar(25),
+  password varchar(100),
+  ship_name varchar(100),
+  ship_street varchar(100),
+  ship_city varchar(100),
+  ship_province varchar(25),
+  ship_country varchar(25),
+  ship_postal_code varchar(25),
+  ship_phone varchar(25),
+  ship_email varchar(25),
+  PRIMARY KEY (id),
+  KEY idx_name (name)
+) ENGINE=InnoDB;
+
+CREATE TABLE orders (
+  id int(10) unsigned NOT NULL auto_increment,
+  customerid int unsigned NOT NULL,
+  onumber varchar(100),
+  odate varchar(100),
+  custID varchar(100),
+  custOrderNo varchar(100),
+  custOrderDt varchar(100),
+  oSubT varchar(25),
+  oTax varchar(25),
+  oShipChg varchar(25),
+  oTot varchar(25),
+  PRIMARY KEY (id),
+  FOREIGN KEY (customerid) REFERENCES customers(id)
+  ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE order_detail (
+    id int(10) unsigned NOT NULL auto_increment,
+    orderid int(10) unsigned NOT NULL,
+    inventoryid int(10) unsigned NOT NULL,
+    itemNo varchar(100),
+    itemPrice varchar(100),
+    itemDisc varchar(100),
+    itemTot varchar(100),
+    PRIMARY KEY (id),
+    FOREIGN KEY (orderid) REFERENCES orders(id)
+      ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (inventoryID) REFERENCES inventory(id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+	) ENGINE=InnoDB;
+
+
+ALTER TABLE orders AUTO_INCREMENT=1025;

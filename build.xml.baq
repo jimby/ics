@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build" default="" basedir=".">
+    <description>
+       Synchronize the Eclipse folders and the web site folders
+    </description>    
+    <!-- Relative location of eclipse folder -->
+    <property name="eclipse" value="." />
+    <!-- Absolute location of web site folder -->
+    <property name="website" value="C:/Presbury UMC/" />
+
+    <!-- Copy new web site files -->
+    <copy todir="${eclipse}">
+        <fileset file="${website}/index.php"/>
+    </copy>
+    <copy todir="${eclipse}/css">
+        <fileset dir="${website}/css"/>
+    </copy>
+    <copy todir="${eclipse}/images">
+        <fileset dir="${website}/images"/>
+    </copy>
+    <copy todir="${eclipse}/protected">
+        <fileset dir="${website}/protected/">
+            <exclude name="yiic*"/>
+            <exclude name=".htaccess"/>
+        </fileset>
+    </copy>   
+    <copy todir="${eclipse}/themes">
+        <fileset dir="${website}/themes"/>
+    </copy>
+
+    <!-- Copy new Eclipse files -->
+    <copy todir="${website}">
+        <fileset file="${eclipse}/index.php"/>
+    </copy>
+    <copy todir="${website}/css">
+        <fileset dir="${eclipse}/css"/>
+    </copy>
+    <copy todir="${website}/images">
+        <fileset dir="${eclipse}/images"/>
+    </copy>
+    <copy todir="${website}/protected">
+        <fileset dir="${eclipse}/protected/"/>
+    </copy>   
+    <copy todir="${website}/themes">
+           <fileset dir="${eclipse}/themes/"/>
+    </copy>   
+</project>

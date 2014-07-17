@@ -1,0 +1,46 @@
+CREATE TABLE customers (
+id 				INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name 			CHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+street 		char(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+city 			CHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+province 		CHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+country 		CHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+postal_code 	CHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+phone		 	CHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+email		 	CHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+ship_name varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+Ship_street 		varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+ship_city 			varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+ship_province 		varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+ship_country 		varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+ship_postal_code 	varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+ship_phone 			varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+ship_email 			varchar(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL);
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE orders (
+id INT NOT NULL AUTO_INCREMENT,
+onumber varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+odate varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+custId varCHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+custOrderNo varCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+custOrderDt varCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+oSubT varCHAR(25)CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+oTax varCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+oShipChg varCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+oTot varCHAR(25) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (custID) REFERENCES customers(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE order_detail (
+id INT NOT NULL AUTO_INCREMENT,
+onumber CHAR(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+itemNo char(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+itemPrice char(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+itemDisc char(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+itemTot char(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (onumber) REFERENCES orders(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

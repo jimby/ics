@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build" default="" basedir=".">
+    <description>
+       Synchronize the Eclipse folders and the web site folders
+    </description>    
+    <!-- Relative location of eclipse folder -->
+    <property name="eclipse" value="." />
+    <!-- Absolute location of web site folder -->
+    <!--<property name="website" value="C:/Presbury UMC/" />-->
+    <property name="website" value="/var/www/ics/" />
+    <!-- Copy new web site files -->
+    <copy todir="${eclipse}">
+        <fileset dir="${website}"/> <!-- this may not be complete -->
+    </copy>
+    <!-- Copy new Eclipse files -->
+    <copy todir="${website}">
+        <fileset dir="${eclipse}"/>
+    </copy>
+</project>

@@ -1,0 +1,81 @@
+CREATE TABLE employee (
+	id smallint(5) unsigned NOT NULL,
+	firstname varchar(30),
+	lastname varchar(30),
+	birthdate date,
+	PRIMARY KEY (id),
+	KEY idx_lastname (lastname)
+) ENGINE=InnoDB;
+
+CREATE TABLE borrowed (
+	ref int(10) unsigned NOT NULL auto_increment,
+	employeeid smallint(5) unsigned NOT NULL,
+	book varchar(50),
+	PRIMARY KEY (ref)
+) ENGINE=InnoDB;
+
+
+ALTER TABLE borrowed 
+ADD CONSTRAINT FK_borrowed 
+FOREIGN KEY (employeeid) REFERENCES employee(id) 
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+-------------------------------------------------------
+CREATE TABLE customers (
+	id int(10) unsigned NOT NULL auto_increment,
+	name varchar(1000),
+	street varchar(100),
+	city varchar(100),
+	province varchar(25),
+	country varchar(25),
+    postal_code varchar(25),
+	phone varchar(25),
+	email varchar(25),
+	ship_name varchar(100),
+	ship_street varchar(100),
+	ship_city varchar(100),
+	ship_province varchar(25),
+	ship_country varchar(25),
+	ship_postal_code varchar(25),
+	ship_phone varchar(25),
+	ship_email varchar(25),
+	PRIMARY KEY (id),
+	KEY idx_name (name)
+) ENGINE=InnoDB;
+
+CREATE TABLE orders (
+	id int(10) unsigned NOT NULL auto_increment,
+	customerid int(10) unsigned NOT NULL,
+	onumber varchar(100),
+	odate varchar(100),
+	custID varchar(100),
+	custOrderNo varchar(100),
+	custOrderDt varchar(100),
+	oSubT varchar(25),
+	oTax varchar(25),
+	oShipChg varchar(25),
+	oTot varchar(25),
+	PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+ALTER TABLE orders 
+ADD CONSTRAINT FK_customers
+FOREIGN KEY (customerid) REFERENCES customers(id) 
+ON UPDATE CASCADE
+ON DELETE CASCADE;
+
+CREATE TABLE order_detail (
+	id int(10) unsigned NOT NULL auto_increment,
+	orderid int(10) unsigned NOT NULL,
+    itemNo varchar(100),
+    itemPrice varchar(100),
+    itemDisc varchar(100),
+    itemTot varchar(100),
+    PRIMARY KEY (id)
+	) ENGINE=InnoDB;
+
+ALTER TABLE order_detail 
+ADD CONSTRAINT FK_orders
+FOREIGN KEY (orderid) REFERENCES orders(id) 
+ON UPDATE CASCADE
+ON DELETE CASCADE;

@@ -1,0 +1,1 @@
+select od.itemQty,i.product,i.cost,od.itemPrice,c.name from order_detail od,inventory i,orders o,customers c where i.id=od.inventoryID and od.orderID=o.id and o.customerID=c.id;
